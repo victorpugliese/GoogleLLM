@@ -10,7 +10,6 @@ def config_model(temperature=0.9, top_p=1, top_k=5, max_output_tokens=2048, gemi
         "top_k": top_k,
         "max_output_tokens": max_output_tokens,
         }
-
     safety_settings = [
         {
             "category": "HARM_CATEGORY_HARASSMENT",
@@ -29,11 +28,8 @@ def config_model(temperature=0.9, top_p=1, top_k=5, max_output_tokens=2048, gemi
             "threshold": "BLOCK_MEDIUM_AND_ABOVE"
         },
     ]
-
     api_key = ''
-
-    genai.configure(api_key=api_key)
-
+    genai.configure(api_key=api_key) #https://aistudio.google.com/app/apikey
     model = genai.GenerativeModel(gemini,
                                 generation_config=generation_config,
                                 safety_settings=safety_settings
@@ -62,17 +58,14 @@ def sidebar():
         else:
             response = model.generate_content(input)
             return response.text, model, ''
-    
     return '', None, ''
 
 content, model, image = sidebar()
 
-def body(content, image):        
-
-
+def body(content, image):
     st.title("Streamlit: Gemini answer")
     st.write("Desenvolvido por Victor Pugliese")
     st.write(content)
     st.write(image)
-     
+
 body(content, image)
