@@ -46,16 +46,14 @@ def sidebar():
     if max_output_tokens == None:
         max_output_tokens = 2048
     st.sidebar.write('The current number is ', max_output_tokens)
-    model = config_model(temperature/100, top_p/100, top_k, max_output_tokens)
-    
-    # Button
     if st.sidebar.button("Enviar"):
         if uploaded_file is not None:
             image = Image.open(uploaded_file)
             model = config_model(temperature/100, top_p/100, top_k, max_output_tokens, 'models/gemini-1.0-pro-vision-latest')
             response = model.generate_content([input, image])
             return response.text, model, image
-        else:
+        else:  
+            model = config_model(temperature/100, top_p/100, top_k, max_output_tokens)
             response = model.generate_content(input)
             return response.text, model, ''
     return '', None, ''
