@@ -3,7 +3,7 @@ import os
 import google.generativeai as genai
 from PIL import Image
 
-def config_model(temperature=0.9, top_p=1, top_k=5, max_output_tokens=2048, gemini='models/gemini-1.0-pro-latest'):
+def config_model(temperature=0.9, top_p=0.1, top_k=50, max_output_tokens=2048, gemini='models/gemini-1.0-pro-latest'):
     generation_config = {
         "temperature": temperature,
         "top_p": top_p,
